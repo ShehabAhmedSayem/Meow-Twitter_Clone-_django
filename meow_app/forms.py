@@ -15,13 +15,13 @@ class RegistrationForm(UserCreationForm):
 
     def is_valid(self):
         form = super(UserCreationForm, self).is_valid()
-        for f, error in self.errors.iteritems():
+        for f, error in iter(self.errors.items()):
             if f != '__all__':
                 self.fields[f].widget.attrs.update({'class': 'error', 'value': strip_tags(error)})
         return form
 
     class Meta:
-        fields = ['email', 'username', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['email', 'first_name', 'last_name', 'username', 'password1', 'password2']
         model = User
 
 
@@ -31,7 +31,7 @@ class AuthenticateForm(AuthenticationForm):
 
     def is_valid(self):
         form = super(AuthenticationForm, self).is_valid()
-        for f, error in self.errors.iteritems():
+        for f, error in iter(self.errors.items()):
             if f != '__all__':
                 self.fields[f].widget.attrs.update({'class': 'error', 'value': strip_tags(error)})
         return form
@@ -42,7 +42,7 @@ class MeowForm(forms.ModelForm):
 
     def is_valid(self):
         form = super(MeowForm, self).is_valid()
-        for f in self.errors.iterkeys():
+        for f in iter(self.errors.keys()):
             if f != '__all__':
                 self.fields[f].widget.attrs.update({'class': 'error meowText'})
         return form

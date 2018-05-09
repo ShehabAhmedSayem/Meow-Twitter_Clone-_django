@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="panel right">
+        <h1>Create a Meow</h1>
+        <p>
+            <form action="/submit" method="post">
+                {% for field in meow_form %}{% csrf_token %}
+                    {{ field }}
+                {% endfor %}
+                <input type="hidden" value="{{ next_url }}" name="next_url">
+                <input type="submit" value="Meow!">
+            </form>
+        </p>
+    </div>
+    <div class="panel left">
+        <h1>Public Meows</h1>
+        {% for meow in meows %}
+        <div class="meowWrapper">
+            <img class="avatar" src="{{ meow.user.profile.gravatar_url }}">
+            <span class="name">{{ meow.user.first_name }}</span>@{{ meow.user.username }}
+            <span class="time">{{ meow.creation_date|timesince }}</span>
+            <p>{{ meow.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
