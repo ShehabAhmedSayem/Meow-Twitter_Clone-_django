@@ -1,1 +1,3 @@
 *.pyc
+meow/database.db
+.idea
