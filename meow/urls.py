@@ -11,4 +11,7 @@ urlpatterns = [
     url(r'^signup$', views.signup),       # register new user
     url(r'^meows$', views.public),        # public meows
     url(r'^submit$', views.submit),       # submit new meow
+    url(r'^users/$', views.users),        # all users
+    url(r'^users/(?P<username>\w{0,30})/$', views.users),  # specific user profile
+    url(r'^follow$', views.follow),       # follower list
 ]
